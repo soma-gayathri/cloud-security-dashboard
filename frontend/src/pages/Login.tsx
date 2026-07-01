@@ -1,22 +1,57 @@
+import { useState } from "react";
+import type { FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "./Login.css";
 
 function Login() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("fresher@cisco-demo.com");
+  const [password, setPassword] = useState("password123");
+  const [error, setError] = useState("");
+
+  async function handleLogin(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+
+    try {
+      await login(email, password);
+      navigate("/dashboard");
+    } catch {
+      setError("Invalid email or password");
+    }
+  }
+
   return (
     <div className="login-container">
       <div className="login-card">
         <h1>Cloud Security Dashboard</h1>
         <p>Login to manage security alerts</p>
 
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="form-group">
             <label>Email</label>
-            <input type="email" placeholder="Enter email" />
+            <input
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
           </div>
 
           <div className="form-group">
             <label>Password</label>
-            <input type="password" placeholder="Enter password" />
+            <input
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
           </div>
+
+          {error && <p className="error-message">{error}</p>}
 
           <button type="submit">Login</button>
         </form>
