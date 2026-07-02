@@ -80,25 +80,9 @@ button:hover {
   color: #4b5563;
   margin-bottom: 4px;
 }
+
 .error-message {
   color: #dc2626;
-  font-size: 14px;
-  margin-bottom: 12px;
-}
-
-.success-message {
-  color: #16a34a;
-  font-size: 14px;
-  margin-bottom: 12px;
-}
-.error-message {
-  color: #dc2626;
-  font-size: 14px;
-  margin-bottom: 12px;
-}
-
-.success-message {
-  color: #16a34a;
   font-size: 14px;
   margin-bottom: 12px;
 }

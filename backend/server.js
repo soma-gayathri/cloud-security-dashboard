@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const authRoutes = require("./routes/authRoutes");
+const alertRoutes = require("./routes/alertRoutes");
 
 const app = express();
 
@@ -9,6 +11,9 @@ app.use(express.json());
 app.get("/api/health", (req, res) => {
   res.json({ status: "Backend running", service: "Cloud Security API" });
 });
+
+app.use("/api/auth", authRoutes);
+app.use("/api/alerts", alertRoutes);
 
 const PORT = 5000;
 
